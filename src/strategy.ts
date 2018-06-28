@@ -12,16 +12,26 @@ export default class CoinyeeStrategy extends Coinyee {
 
     if (wallet) {
       let { depths: { asks, bids }, lines : klines, trades } = deepthAndKLine;
-
-      if (wallet[coinFrom.toUpperCase()] > 1) {
+      let remainFrom = wallet[coinFrom.toUpperCase()];
+      let remainTo = wallet[coinTo.toUpperCase()];
+      if (remainFrom > 1) {
         // 卖
-        // let math =
+        let price = this.calcPrice();
+        this.createOrder()
       }
-      if (wallet[coinTo.toUpperCase()] > 1) {
+      if (remainTo > 1) {
         // 买
       }
     }
     // 先查询市场深度
 
+  }
+  calcPrice(deepth: object[], type = 'buy') {
+    if (type === 'buy') {
+      deepth.sort((a, b) => a[0] - b[0]);
+      return 
+    } else {
+      deepth.sort((a, b) => b[0] - a[0]);
+    }
   }
 }
