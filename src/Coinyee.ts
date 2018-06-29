@@ -12,8 +12,9 @@
         dataType: 'json'
       });
   }
-  createOrder(price: string, amount:string, type = 'buy') {
+  createOrder(price: string, amount: string, type = 'buy') {
     let { coinFrom: coin, coinTo: unit } = this;
+    // amount.match(/\.\d{2}()/)
     return this.getJSON('/server/trade/pending', {
       coin,
       unit,
@@ -43,7 +44,7 @@
   }
 
   // since 为上一条数据中 trades 的最后一条数据的时间戳
-  getDeepthAndKLine(since?: string,range: number = 86400000, prevTradeTime: number = Date.now()) {
+  getDepthAndKLine(since?: string,range: number = 86400000, prevTradeTime: number = Date.now()) {
     let { coinFrom, coinTo } = this;
     return this.getJSON('/kline/proxy.php', {
       symbol: `${coinFrom + coinTo}`.toUpperCase(),
